@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SisHosp Maraú – Cadastrar Cliente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-marca"> SisHosp Maraú</div>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="residencias.html">Residências</a>
+      <a href="nova-reserva.html">Nova Reserva</a>
+      <a href="historico.html">Histórico</a>
+      <a href="clientes.html" class="ativo">Clientes</a>
+      <a href="login.html" class="nav-sair">Sair</a>
+    </div>
+  </nav>
+
+  <div class="pagina">
+
+    <div class="breadcrumb">
+      <a href="clientes.html">Clientes</a> › Novo Cliente
+    </div>
+
+    <h1>Cadastrar Cliente</h1>
+    <p class="subtitulo">Preencha os dados do novo cliente</p>
+
+    <div class="card" style="max-width: 700px;">
+
+      <div class="campo">
+        <label>Nome Completo</label>
+        <input type="text" placeholder="Maria das Graças Silva" />
+      </div>
+
+      <div class="campos-2">
+        <div class="campo">
+          <label>CPF</label>
+          <input type="text" placeholder="000.000.000-00" />
+        </div>
+        <div class="campo">
+          <label>Telefone</label>
+          <input type="text" placeholder="(75) 9 9999-9999" />
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>E-mail</label>
+        <input type="email" placeholder="cliente@email.com" />
+      </div>
+
+      <div class="campo">
+        <label>Endereço</label>
+        <input type="text" placeholder="Rua das Flores, 12 – Maraú, BA" />
+      </div>
+
+      <div class="campos-2">
+        <div class="campo">
+          <label>Senha</label>
+          <input type="password" placeholder="••••••••" />
+        </div>
+        <div class="campo">
+          <label>Confirmar Senha</label>
+          <input type="password" placeholder="••••••••" />
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="acoes">
+        <a href="clientes.html" class="btn btn-primario">Salvar Cliente</a>
+        <a href="clientes.html" class="btn btn-contorno">Cancelar</a>
+      </div>
+
+    </div>
+
+    <div class="rodape-proto">
+       Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
+    </div>
+  </div>
+
+</body>
+</html>

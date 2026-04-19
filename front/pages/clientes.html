@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SisHosp Maraú – Clientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-marca"> SisHosp Maraú</div>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="residencias.html">Residências</a>
+      <a href="nova-reserva.html">Nova Reserva</a>
+      <a href="historico.html">Histórico</a>
+      <a href="clientes.html" class="ativo">Clientes</a>
+      <a href="login.html" class="nav-sair">Sair</a>
+    </div>
+  </nav>
+
+  <div class="pagina">
+
+    <div class="topo-secao">
+      <div>
+        <h1>Clientes</h1>
+        <p class="subtitulo">Clientes cadastrados no sistema</p>
+      </div>
+      <a href="cadastro-cliente.html" class="btn btn-primario">＋ Novo Cliente</a>
+    </div>
+
+    <div class="card">
+      <div class="mb-2">
+        <input type="text" placeholder="Buscar por nome, CPF ou e-mail..." style="max-width:420px;" />
+      </div>
+
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Telefone</th>
+              <th>E-mail</th>
+              <th>Aluguéis</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ana Souza</td>
+              <td>123.456.789-00</td>
+              <td>(75) 9 9999-1234</td>
+              <td>ana@email.com</td>
+              <td>5</td>
+              <td><button class="btn btn-contorno btn-peq">Ver</button></td>
+            </tr>
+            <tr>
+              <td>Pedro Lima</td>
+              <td>987.654.321-00</td>
+              <td>(75) 9 8877-6655</td>
+              <td>pedro@email.com</td>
+              <td>2</td>
+              <td><button class="btn btn-contorno btn-peq">Ver</button></td>
+            </tr>
+            <tr>
+              <td>Luisa Alves</td>
+              <td>111.222.333-44</td>
+              <td>(71) 9 9944-3311</td>
+              <td>luisa@email.com</td>
+              <td>3</td>
+              <td><button class="btn btn-contorno btn-peq">Ver</button></td>
+            </tr>
+            <tr>
+              <td>Carlos Freitas</td>
+              <td>555.444.333-22</td>
+              <td>(21) 9 8866-7777</td>
+              <td>carlos@email.com</td>
+              <td>1</td>
+              <td><button class="btn btn-contorno btn-peq">Ver</button></td>
+            </tr>
+            <tr>
+              <td>Mariana Costa</td>
+              <td>222.111.444-55</td>
+              <td>(73) 9 9922-8844</td>
+              <td>mariana@email.com</td>
+              <td>2</td>
+              <td><button class="btn btn-contorno btn-peq">Ver</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="rodape-proto">
+       Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
+    </div>
+  </div>
+
+</body>
+</html>
