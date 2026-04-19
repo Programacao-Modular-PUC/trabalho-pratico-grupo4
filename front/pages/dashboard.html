@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SisHosp Maraú – Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-marca">🌊 SisHosp Maraú</div>
+    <div class="nav-links">
+      <a href="02-dashboard.html" class="ativo">Dashboard</a>
+      <a href="03-residencias.html">Residências</a>
+      <a href="06-nova-reserva.html">Nova Reserva</a>
+      <a href="08-historico.html">Histórico</a>
+      <a href="09-clientes.html">Clientes</a>
+      <a href="01-login.html" class="nav-sair">Sair</a>
+    </div>
+  </nav>
+
+  <div class="pagina">
+
+    <div class="topo-secao">
+      <div>
+        <h1>Dashboard</h1>
+        <p class="subtitulo">Visão geral do sistema</p>
+      </div>
+    </div>
+
+
+    <div class="grid-4 mb-3">
+      <div class="stat-card">
+        <div class="stat-icone azul">🏠</div>
+        <div>
+          <div class="stat-valor">4</div>
+          <div class="stat-label">Residências</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icone verde">🛏️</div>
+        <div>
+          <div class="stat-valor">12</div>
+          <div class="stat-label">Quartos</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icone coral">📋</div>
+        <div>
+          <div class="stat-valor">7</div>
+          <div class="stat-label">Aluguéis no Mês</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icone areia">👥</div>
+        <div>
+          <div class="stat-valor">18</div>
+          <div class="stat-label">Clientes</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="grid-2">
+
+      <div class="card">
+        <h2>Próximas Entradas</h2>
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Residência</th>
+                <th>Entrada</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ana Souza</td>
+                <td>Casa Maré</td>
+                <td>22/07 às 12h</td>
+                <td><span class="badge badge-verde">Confirmado</span></td>
+              </tr>
+              <tr>
+                <td>Pedro Lima</td>
+                <td>Vila Coral</td>
+                <td>24/07 às 15h</td>
+                <td><span class="badge badge-azul">Reservado</span></td>
+              </tr>
+              <tr>
+                <td>Luisa Alves</td>
+                <td>Casa Maré</td>
+                <td>28/07 às 12h</td>
+                <td><span class="badge badge-cinza">Pendente</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Disponibilidade de Hoje</h2>
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Residência</th>
+                <th>Total</th>
+                <th>Livres</th>
+                <th>Ocupados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Casa Maré</td>
+                <td>4</td>
+                <td>2</td>
+                <td><span class="badge badge-coral">2</span></td>
+              </tr>
+              <tr>
+                <td>Vila Coral</td>
+                <td>3</td>
+                <td>3</td>
+                <td><span class="badge badge-verde">0</span></td>
+              </tr>
+              <tr>
+                <td>Pousada Brisa</td>
+                <td>3</td>
+                <td>1</td>
+                <td><span class="badge badge-coral">2</span></td>
+              </tr>
+              <tr>
+                <td>Recanto Azul</td>
+                <td>2</td>
+                <td>2</td>
+                <td><span class="badge badge-verde">0</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rodape-proto">
+      🎨 Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
+    </div>
+  </div>
+
+</body>
+</html>
