@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SisHosp Maraú – Nova Residência</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-marca"> SisHosp Maraú</div>
+    <div class="nav-links">
+      <a href="02-dashboard.html">Dashboard</a>
+      <a href="03-residencias.html" class="ativo">Residências</a>
+      <a href="06-nova-reserva.html">Nova Reserva</a>
+      <a href="08-historico.html">Histórico</a>
+      <a href="09-clientes.html">Clientes</a>
+      <a href="01-login.html" class="nav-sair">Sair</a>
+    </div>
+  </nav>
+
+  <div class="pagina">
+
+    <div class="breadcrumb">
+      <a href="03-residencias.html">Residências</a> › Nova Residência
+    </div>
+
+    <h1>Cadastrar Residência</h1>
+    <p class="subtitulo">Preencha os dados do imóvel</p>
+
+    <div class="card" style="max-width: 800px;">
+
+      <h2>Dados do Imóvel</h2>
+
+      <div class="campos-3">
+        <div class="campo">
+          <label>Endereço</label>
+          <input type="text" placeholder="Rua das Dunas" />
+        </div>
+        <div class="campo">
+          <label>Número</label>
+          <input type="text" placeholder="15" />
+        </div>
+        <div class="campo">
+          <label>Bairro</label>
+          <input type="text" placeholder="Centro" />
+        </div>
+      </div>
+
+      <div class="campos-2">
+        <div class="campo">
+          <label>CEP</label>
+          <input type="text" placeholder="45520-000" />
+        </div>
+        <div class="campo">
+          <label>Cidade / UF</label>
+          <input type="text" placeholder="Maraú – BA" />
+        </div>
+      </div>
+
+      <div class="campos-2">
+        <div class="campo">
+          <label>Telefone</label>
+          <input type="text" placeholder="(75) 9 9999-0000" />
+        </div>
+        <div class="campo">
+          <label>E-mail de Contato</label>
+          <input type="email" placeholder="contato@residencia.com" />
+        </div>
+      </div>
+
+      <hr />
+
+      <h2>Quartos</h2>
+      <p style="color:var(--muted); font-size:.88rem; margin-bottom:1rem;">
+        Adicione os quartos disponíveis nesta residência.
+      </p>
+
+      <div style="border:1.5px solid var(--border); border-radius:8px; padding:1.2rem; margin-bottom:1rem; background:var(--sand);">
+        <div class="campos-3">
+          <div class="campo">
+            <label>Tipo do Quarto</label>
+            <select>
+              <option>Solteiro</option>
+              <option>Casal</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label>Número do Quarto</label>
+            <input type="text" placeholder="01" />
+          </div>
+          <div class="campo">
+            <label>Valor Base da Diária (R$)</label>
+            <input type="number" placeholder="180,00" />
+          </div>
+        </div>
+        <div class="check-linha">
+          <input type="checkbox" id="ar1" />
+          <label for="ar1">Possui ar-condicionado</label>
+        </div>
+        <div class="check-linha">
+          <input type="checkbox" id="hidro1" />
+          <label for="hidro1">Possui banheira de hidromassagem</label>
+        </div>
+      </div>
+
+      <button class="btn btn-contorno btn-peq" style="margin-bottom:1.2rem;">
+        ＋ Adicionar outro quarto
+      </button>
+
+      <hr />
+
+      <div class="acoes">
+        <a href="03-residencias.html" class="btn btn-primario">Salvar Residência</a>
+        <a href="03-residencias.html" class="btn btn-contorno">Cancelar</a>
+      </div>
+
+    </div>
+
+    <div class="rodape-proto">
+      Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
+    </div>
+  </div>
+
+</body>
+</html>
