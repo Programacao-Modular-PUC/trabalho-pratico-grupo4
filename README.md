@@ -63,4 +63,82 @@ Glender Brás de Medeiros
 ![UML](/img/UML.drawio.png)
 
 ## Cartão CRC
+Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnica utilizada no processo de modelagem orientada a objetos. Eles ajudam a representar de forma simples e visual as principais responsabilidades de uma classe e como ela se relaciona com outras classes dentro de um sistema.
+
+### Caso de Uso: Gerenciar Residências
+
+| **Classe: Residencia** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer seu endereço | • Quarto |
+| • Conhecer seu número | • Aluguel |
+| • Conhecer seu bairro | |
+| • Conhecer seu CEP | |
+| • Conhecer seu telefone de contato | |
+| • Conhecer seu e-mail de contato | |
+| • Conhecer a lista de quartos disponíveis para aluguel | |
+| • Conhecer o histórico de aluguéis realizados | |
+
+---
+
+### Caso de Uso: Gerenciar Quartos
+
+| **Classe: Quarto** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer seu tipo (solteiro ou casal) | • Residencia |
+| • Conhecer seu valor base de diária | • Aluguel |
+| • Conhecer se possui ar-condicionado | |
+| • Conhecer se possui banheira de hidromassagem | |
+| • Calcular o valor final da diária (base + adicionais) | |
+| • Verificar se está disponível em determinado período | |
+
+---
+
+### Caso de Uso: Cadastrar e Autenticar Clientes
+
+| **Classe: Cliente** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer seu nome completo | • Aluguel |
+| • Conhecer seu CPF | |
+| • Conhecer seu endereço | |
+| • Conhecer seu telefone de contato | |
+| • Conhecer seu e-mail de contato | |
+
+---
+
+### Caso de Uso: Realizar Aluguel
+
+| **Classe: Aluguel** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer a residência associada | • Residencia |
+| • Conhecer o quarto alugado | • Quarto |
+| • Conhecer o cliente responsável | • Cliente |
+| • Conhecer a data e horário de entrada | • Pagamento |
+| • Conhecer a data e horário de saída | |
+| • Conhecer a quantidade de diárias calculadas | |
+| • Conhecer o valor final do aluguel | |
+| • Calcular a quantidade de diárias conforme regra de negócio | |
+| • Calcular o valor final (diária do quarto × quantidade de diárias) | |
+| • Verificar se o quarto está disponível no período solicitado | |
+| • Imprimir o formulário de aluguel na tela | |
+| • Gerar o pagamento associado ao aluguel | |
+
+---
+
+### Caso de Uso: Registrar Pagamento
+
+| **Classe: Pagamento** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer o aluguel ao qual está vinculado | • Aluguel |
+| • Conhecer o valor total a pagar | |
+| • Conhecer seu status (pendente ou efetuado) | |
+
+---
+
+
 [Clique aqui para abrir os Cartões CRC](crc.docx)
+
