@@ -21,7 +21,6 @@ public class QuartoFamilia extends Quarto {
         double percentualPorHospede = 0.10;
         double total = getValorBase() * (1 + (numHospedes * percentualPorHospede));
 
-        // Desconto progressivo por grupo
         if (numHospedes >= 5) total *= 0.85;
         else if (numHospedes >= 3) total *= 0.92;
 
