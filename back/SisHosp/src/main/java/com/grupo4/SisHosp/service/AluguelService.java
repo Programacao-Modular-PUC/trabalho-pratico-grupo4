@@ -1,12 +1,12 @@
 package com.grupo4.SisHosp.service;
 
 import com.grupo4.SisHosp.model.*;
-import com.grupo4.SisHosp.model.QuartoDuplo;
-import com.grupo4.SisHosp.model.QuartoFamilia;
 import com.grupo4.SisHosp.repository.AluguelRepository;
+import com.grupo4.SisHosp.repository.ClienteRepository;
 import com.grupo4.SisHosp.repository.QuartoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,6 +15,7 @@ public class AluguelService {
 
     private final AluguelRepository aluguelRepository;
     private final QuartoRepository quartoRepository;
+    private final ClienteRepository clienteRepository;
 
     public List<Aluguel> listarTodos() {
         return aluguelRepository.findAll();
@@ -25,16 +26,28 @@ public class AluguelService {
                 .orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
     }
 
-    public Aluguel salvar(Aluguel aluguel) {
-        Quarto quarto = quartoRepository.findById(aluguel.getQuarto().getId())
+    public Aluguel salvar(Long clienteId, Long quartoId, LocalDateTime entrada,
+                          LocalDateTime saida, int numHospedes, boolean solicitouBerco) {
+
+        Cliente cliente = clienteRepository.findById(clienteId)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        Quarto quarto = quartoRepository.findById(quartoId)
                 .orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
-        int numHospedes = aluguel.getNumHospedes() != null ? aluguel.getNumHospedes() : 1;
+        Aluguel aluguel = new Aluguel();
+        aluguel.setCliente(cliente);
+        aluguel.setQuarto(quarto);
+        aluguel.setDataEntrada(entrada);
+        aluguel.setDataSaida(saida);
+        aluguel.setNumHospedes(numHospedes);
+        aluguel.setSolicitouBerco(solicitouBerco);
+
+        int qtdDiarias = Aluguel.calcularQtdDiarias(entrada, saida);
+        aluguel.setQtdDiarias(qtdDiarias);
 
         double valorDiaria;
-
         if (quarto instanceof QuartoDuplo duplo) {
-            boolean solicitouBerco = Boolean.TRUE.equals(aluguel.getSolicitouBerco());
             valorDiaria = duplo.calcularDiaria(solicitouBerco);
         } else if (quarto instanceof QuartoFamilia familia) {
             valorDiaria = familia.calcularDiaria(numHospedes);
@@ -42,7 +55,7 @@ public class AluguelService {
             valorDiaria = quarto.calcularDiaria();
         }
 
-        aluguel.setValorTotal(valorDiaria);
+        aluguel.setValorTotal(valorDiaria * qtdDiarias);
         return aluguelRepository.save(aluguel);
     }
 

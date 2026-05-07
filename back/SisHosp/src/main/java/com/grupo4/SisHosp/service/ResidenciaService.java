@@ -29,6 +29,11 @@ public class ResidenciaService {
         Residencia residencia = buscarPorId(id);
         residencia.setNome(dados.getNome());
         residencia.setEndereco(dados.getEndereco());
+        residencia.setNumero(dados.getNumero());
+        residencia.setBairro(dados.getBairro());
+        residencia.setCep(dados.getCep());
+        residencia.setTelefone(dados.getTelefone());
+        residencia.setEmail(dados.getEmail());
         residencia.setCidade(dados.getCidade());
         return repository.save(residencia);
     }

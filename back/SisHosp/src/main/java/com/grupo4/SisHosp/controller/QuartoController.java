@@ -1,6 +1,6 @@
 package com.grupo4.SisHosp.controller;
 
-import com.grupo4.SisHosp.model.Quarto;
+import com.grupo4.SisHosp.model.*;
 import com.grupo4.SisHosp.service.QuartoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/quartos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class QuartoController {
 
     private final QuartoService service;
@@ -24,8 +25,18 @@ public class QuartoController {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
-    @PostMapping
-    public ResponseEntity<Quarto> criar(@RequestBody Quarto quarto) {
+    @PostMapping("/individual")
+    public ResponseEntity<Quarto> criarIndividual(@RequestBody QuartoIndividual quarto) {
+        return ResponseEntity.ok(service.salvar(quarto));
+    }
+
+    @PostMapping("/duplo")
+    public ResponseEntity<Quarto> criarDuplo(@RequestBody QuartoDuplo quarto) {
+        return ResponseEntity.ok(service.salvar(quarto));
+    }
+
+    @PostMapping("/familia")
+    public ResponseEntity<Quarto> criarFamilia(@RequestBody QuartoFamilia quarto) {
         return ResponseEntity.ok(service.salvar(quarto));
     }
 

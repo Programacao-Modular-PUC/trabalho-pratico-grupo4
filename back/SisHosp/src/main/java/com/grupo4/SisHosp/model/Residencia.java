@@ -15,6 +15,11 @@ public class Residencia {
 
     private String nome;
     private String endereco;
+    private String numero;
+    private String bairro;
+    private String cep;
+    private String telefone;
+    private String email;
     private String cidade;
 
     @OneToMany(mappedBy = "residencia", cascade = CascadeType.ALL)
