@@ -1,0 +1,27 @@
+package com.grupo4.SisHosp.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Getter @Setter
+@NoArgsConstructor
+public class Pagamento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "aluguel_id")
+    private Aluguel aluguel;
+
+    private Double valor;
+    private String status;
+
+    public Pagamento(Aluguel aluguel) {
+        this.aluguel = aluguel;
+        this.valor = aluguel.getValorTotal();
+        this.status = "PENDENTE";
+    }
+}
