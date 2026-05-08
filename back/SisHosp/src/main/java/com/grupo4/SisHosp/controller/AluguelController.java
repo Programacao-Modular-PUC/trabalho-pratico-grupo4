@@ -27,6 +27,17 @@ public class AluguelController {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
+    @GetMapping("/residencia/{residenciaId}")
+    public List<Aluguel> historicoPorResidencia(@PathVariable Long residenciaId) {
+        return service.listarPorResidencia(residenciaId);
+    }
+
+    @GetMapping("/{id}/formulario")
+    public ResponseEntity<String> formulario(@PathVariable Long id) {
+        Aluguel aluguel = service.buscarPorId(id);
+        return ResponseEntity.ok(aluguel.gerarFormulario());
+    }
+
     @PostMapping
     public ResponseEntity<Aluguel> criar(@RequestBody Map<String, Object> body) {
         Long clienteId = Long.valueOf(body.get("clienteId").toString());
