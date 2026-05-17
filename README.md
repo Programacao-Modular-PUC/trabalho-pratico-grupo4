@@ -60,7 +60,7 @@ Glender Brás de Medeiros
 
 ## Diagrama de Classes
  
-![UML](/img/UML.drawio.png)
+![UML](/img/UmlSisShop.drawio%20.png)
 
 ## Cartão CRC
 Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnica utilizada no processo de modelagem orientada a objetos. Eles ajudam a representar de forma simples e visual as principais responsabilidades de uma classe e como ela se relaciona com outras classes dentro de um sistema.
