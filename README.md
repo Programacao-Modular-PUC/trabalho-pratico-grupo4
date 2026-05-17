@@ -83,17 +83,44 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 
 ### Caso de Uso: Gerenciar Quartos
 
-| **Classe: Quarto** | |
+| **Classe: Quarto (abstrata)** | |
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
-| • Conhecer seu tipo (solteiro ou casal) | • Residencia |
-| • Conhecer seu valor base de diária | • Aluguel |
-| • Conhecer se possui ar-condicionado | |
-| • Conhecer se possui banheira de hidromassagem | |
-| • Calcular o valor final da diária (base + adicionais) | |
-| • Verificar se está disponível em determinado período | |
+| • Conhecer seu valor base de diária | • Residencia |
+| • Conhecer se possui ar-condicionado | • Aluguel |
+| • Conhecer se possui banheira de hidromassagem | • QuartoIndividual |
+| • Conhecer a residência à qual pertence | • QuartoDuplo |
+| • Calcular o valor dos adicionais comuns (AR + hidro) | • QuartoFamilia |
+| • Definir o contrato para cálculo de diária (método abstrato) | |
 
 ---
+
+| **Classe: QuartoIndividual** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer o número de camas de solteiro | • Quarto |
+| • Calcular o valor da diária com base no número de camas | |
+| • Aplicar adicional por cama extra (acima da primeira) | |
+
+---
+
+| **Classe: QuartoDuplo** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer o tipo da cama (casal, queen ou king) | • Quarto |
+| • Conhecer se possui berço disponível | |
+| • Calcular o valor da diária com adicional do tipo de cama | |
+| • Aplicar taxa extra quando o cliente solicita berço | |
+
+---
+
+| **Classe: QuartoFamilia** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Conhecer a capacidade máxima de hóspedes | • Quarto |
+| • Conhecer o número de ambientes do quarto | |
+| • Calcular o valor da diária com percentual proporcional ao número de hóspedes | |
+| • Aplicar desconto progressivo para grupos maiores | |
 
 ### Caso de Uso: Cadastrar e Autenticar Clientes
 
