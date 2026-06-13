@@ -32,6 +32,12 @@ public class AluguelController {
         return service.listarPorResidencia(residenciaId);
     }
 
+    
+    @GetMapping("/cliente/{clienteId}")
+    public List<Aluguel> historicoPorCliente(@PathVariable Long clienteId) {
+        return service.listarPorCliente(clienteId);
+    }
+
     @GetMapping("/{id}/formulario")
     public ResponseEntity<String> formulario(@PathVariable Long id) {
         Aluguel aluguel = service.buscarPorId(id);
@@ -40,19 +46,34 @@ public class AluguelController {
 
     @PostMapping
     public ResponseEntity<Aluguel> criar(@RequestBody Map<String, Object> body) {
-        Long clienteId = Long.valueOf(body.get("clienteId").toString());
-        Long quartoId = Long.valueOf(body.get("quartoId").toString());
-        LocalDateTime entrada = LocalDateTime.parse(body.get("dataEntrada").toString());
-        LocalDateTime saida = LocalDateTime.parse(body.get("dataSaida").toString());
-        int numHospedes = Integer.parseInt(body.get("numHospedes").toString());
+        Long clienteId = Long.valueOf(obrigatorio(body, "clienteId").toString());
+        Long quartoId = Long.valueOf(obrigatorio(body, "quartoId").toString());
+        LocalDateTime entrada = LocalDateTime.parse(obrigatorio(body, "dataEntrada").toString());
+        LocalDateTime saida = LocalDateTime.parse(obrigatorio(body, "dataSaida").toString());
+        int numHospedes = Integer.parseInt(obrigatorio(body, "numHospedes").toString());
         boolean solicitouBerco = Boolean.parseBoolean(body.getOrDefault("solicitouBerco", false).toString());
 
         return ResponseEntity.ok(service.salvar(clienteId, quartoId, entrada, saida, numHospedes, solicitouBerco));
+    }
+
+    
+    @PutMapping("/{id}/cancelar")
+    public ResponseEntity<Aluguel> cancelar(@PathVariable Long id) {
+        return ResponseEntity.ok(service.cancelar(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    
+    private static Object obrigatorio(Map<String, Object> body, String campo) {
+        Object valor = body.get(campo);
+        if (valor == null) {
+            throw new IllegalArgumentException("Campo obrigatório ausente: " + campo);
+        }
+        return valor;
     }
 }

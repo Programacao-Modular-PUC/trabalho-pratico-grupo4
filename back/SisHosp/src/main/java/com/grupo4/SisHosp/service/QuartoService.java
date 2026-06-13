@@ -5,6 +5,7 @@ import com.grupo4.SisHosp.repository.QuartoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,12 @@ public class QuartoService {
 
     public List<Quarto> listarTodos() {
         return repository.findAll();
+    }
+
+    public List<Quarto> listarPorTipo(String tipo) {
+        return repository.findAll().stream()
+                .filter(q -> q.getTipo().equalsIgnoreCase(tipo))
+                .collect(Collectors.toList());
     }
 
     public Quarto buscarPorId(Long id) {

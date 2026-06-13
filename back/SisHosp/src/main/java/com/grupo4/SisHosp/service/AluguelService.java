@@ -2,6 +2,7 @@ package com.grupo4.SisHosp.service;
 
 import com.grupo4.SisHosp.model.*;
 import com.grupo4.SisHosp.repository.*;
+import com.grupo4.SisHosp.model.StatusAluguel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -34,7 +35,7 @@ public class AluguelService {
         Quarto quarto = quartoRepository.findById(quartoId)
                 .orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
-        List<Aluguel> conflitos = aluguelRepository.findConflitos(quartoId, entrada, saida);
+        List<Aluguel> conflitos = aluguelRepository.findConflitos(quartoId, entrada, saida, StatusAluguel.ATIVO);
         if (!conflitos.isEmpty()) {
             throw new RuntimeException("Quarto já está ocupado neste período!");
         }
@@ -76,5 +77,16 @@ public class AluguelService {
 
     public void deletar(Long id) {
         aluguelRepository.deleteById(id);
+    }
+
+    public Aluguel cancelar(Long id) {
+        Aluguel aluguel = aluguelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
+        aluguel.setStatus(StatusAluguel.CANCELADO);
+        return aluguelRepository.save(aluguel);
+    }
+
+    public List<Aluguel> listarPorCliente(Long clienteId) {
+        return aluguelRepository.findByClienteId(clienteId);
     }
 }

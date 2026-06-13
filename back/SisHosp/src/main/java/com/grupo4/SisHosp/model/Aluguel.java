@@ -1,6 +1,7 @@
 package com.grupo4.SisHosp.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -24,6 +25,7 @@ public class Aluguel {
 
     @ManyToOne
     @JoinColumn(name = "residencia_id")
+    @JsonIgnoreProperties({"quartos"})
     private Residencia residencia;
 
     private LocalDateTime dataEntrada;
@@ -32,6 +34,9 @@ public class Aluguel {
     private Boolean solicitouBerco = false;
     private Integer qtdDiarias;
     private Double valorTotal;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAluguel status = StatusAluguel.ATIVO;
 
     public static int calcularQtdDiarias(LocalDateTime entrada, LocalDateTime saida) {
         long dias = ChronoUnit.DAYS.between(entrada.toLocalDate(), saida.toLocalDate());
