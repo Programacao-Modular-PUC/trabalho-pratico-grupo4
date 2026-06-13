@@ -35,7 +35,23 @@ public class QuartoDuplo extends Quarto {
         return total;
     }
 
+    @Override
+    public int getCapacidade() {
+        return 2;
+    }
+
+    @Override
+    public boolean permiteBerco() {
+        
+        return Boolean.TRUE.equals(possuiBerco);
+    }
+
     public enum TipoCama {
         CASAL, QUEEN, KING
+    }
+
+    @Override
+    public String getTipo() {
+        return "DUPLO";
     }
 }

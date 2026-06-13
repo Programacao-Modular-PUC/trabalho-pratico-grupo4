@@ -26,4 +26,14 @@ public class QuartoFamilia extends Quarto {
 
         return total;
     }
+
+    @Override
+    public int getCapacidade() {
+        return capacidadeMaxima != null ? capacidadeMaxima : 0;
+    }
+
+    @Override
+    public String getTipo() {
+        return "FAMILIA";
+    }
 }

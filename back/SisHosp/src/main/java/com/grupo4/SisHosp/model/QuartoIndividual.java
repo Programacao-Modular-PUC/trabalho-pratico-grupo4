@@ -20,4 +20,15 @@ public class QuartoIndividual extends Quarto {
         }
         return base + (numeroDeCamas - 1) * 40.0;
     }
+
+    @Override
+    public int getCapacidade() {
+
+        return numeroDeCamas;
+    }
+
+    @Override
+    public String getTipo() {
+        return "INDIVIDUAL";
+    }
 }

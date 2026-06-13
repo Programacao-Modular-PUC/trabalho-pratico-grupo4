@@ -1,6 +1,7 @@
 package com.grupo4.SisHosp.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Entity
@@ -22,10 +23,21 @@ public abstract class Quarto {
 
     @ManyToOne
     @JoinColumn(name = "residencia_id")
-
+    @JsonIgnoreProperties({"quartos"})
     private Residencia residencia;
 
     public abstract Double calcularDiaria();
+
+    
+    public abstract String getTipo();
+
+    
+    public abstract int getCapacidade();
+
+    
+    public boolean permiteBerco() {
+        return false;
+    }
 
     protected Double calcularAdicionaisComuns() {
         double adicionais = 0.0;
