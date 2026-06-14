@@ -1,4 +1,4 @@
-package com.grupo4.SisHosp.expetion;
+package com.grupo4.SisHosp.exception;
 
 public class CapacidadeExcedidaException extends RuntimeException {  
     public CapacidadeExcedidaException(String mensagem) {

@@ -1,4 +1,4 @@
-package com.grupo4.SisHosp.expetion;
+package com.grupo4.SisHosp.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.grupo4.SisHosp.expetion;
+package com.grupo4.SisHosp.exception;
 
 public class EntidadeNaoEncontradaException extends RuntimeException {
     public EntidadeNaoEncontradaException(String mensagem) {
