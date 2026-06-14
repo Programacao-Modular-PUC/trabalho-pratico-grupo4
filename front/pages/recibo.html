@@ -3,94 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SisHosp Maraú – Formulário de Aluguel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/front/css/style.css" />
+  <title>SisHosp Maraú · Recibo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
+
 <body>
+  <div class="app">
+    <aside class="sidebar nao-imprimir" id="barra"></aside>
+    <div class="conteudo">
+      <div class="pagina">
 
-  <nav>
-    <div class="nav-marca"> SisHosp Maraú</div>
-    <div class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="residencias.html">Residências</a>
-      <a href="nova-reserva.html">Nova Reserva</a>
-      <a href="historico.html">Histórico</a>
-      <a href="clientes.html">Clientes</a>
-      <a href="login.html" class="nav-sair">Sair</a>
-    </div>
-  </nav>
+        <div id="avisoOk" class="aviso aviso-sucesso mb-3 nao-imprimir"
+          style="max-width:640px; margin:0 auto 1.5rem; display:none;">
+          ✓ Reserva confirmada com sucesso!
+        </div>
 
-  <div class="pagina">
+        <div id="conteudoRecibo">
+          <p class="text-muted" style="text-align:center;">Carregando recibo…</p>
+        </div>
 
-    <div class="aviso aviso-sucesso mb-3" style="max-width:680px; margin:0 auto 1.5rem;">
-       Reserva confirmada com sucesso!
-    </div>
+        <div class="acoes nao-imprimir" id="botoes"
+          style="max-width:640px; margin:1.4rem auto 0; justify-content:center; display:none;">
+          <button class="btn btn-primario" id="btnImprimir">Imprimir recibo</button>
+          <button class="btn btn-perigo" id="btnCancelar">Cancelar reserva</button>
+          <a href="dashboard.html" class="btn btn-contorno">Voltar ao painel</a>
+        </div>
 
-    <div class="recibo">
-
-      <div class="recibo-cabecalho">
-        <div style="font-size:2rem; margin-bottom:.4rem;"></div>
-        <h2>SisHosp Maraú</h2>
-        <p>Formulário de Aluguel · Nº 2025-0047</p>
-        <p>Casa Maré – R. das Dunas, 15 – Centro, Maraú – BA</p>
-        <hr style="max-width:200px; margin:1rem auto;" />
       </div>
-
-      <div class="recibo-linha">
-        <span class="rotulo">Cliente</span>
-        <span class="valor">Ana Souza</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">CPF</span>
-        <span class="valor">123.456.789-00</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">Quarto</span>
-        <span class="valor">Solteiro Nº 01 – Casa Maré</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">Data e horário de entrada</span>
-        <span class="valor">22/07/2025 às 12:00</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">Data e horário de saída</span>
-        <span class="valor">25/07/2025 às 11:00</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">Número de diárias</span>
-        <span class="valor">3</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">Valor base (3 × R$ 180,00)</span>
-        <span class="valor">R$ 540,00</span>
-      </div>
-      <div class="recibo-linha">
-        <span class="rotulo">Ar-condicionado (3 × R$ 30,00)</span>
-        <span class="valor">R$ 90,00</span>
-      </div>
-      <div class="recibo-total">
-        <span>Total a pagar</span>
-        <span>R$ 630,00</span>
-      </div>
-
-      <div class="assinaturas">
-        <div class="assinatura">Assinatura do Responsável</div>
-        <div class="assinatura">Assinatura do Cliente</div>
-      </div>
-
-    </div>
-
-    <div class="acoes" style="max-width:680px; margin:1.4rem auto 0; justify-content:center;">
-      <button class="btn btn-primario"> Imprimir Recibo</button>
-      <a href="nova-reserva.html" class="btn btn-contorno">Nova Reserva</a>
-      <a href="dashboard.html" class="btn btn-contorno">Voltar ao Dashboard</a>
-    </div>
-
-    <div class="rodape-proto">
-       Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
     </div>
   </div>
 
+  <script src="../js/api.js"></script>
+  <script src="../js/recibo.js"></script>
 </body>
+
 </html>

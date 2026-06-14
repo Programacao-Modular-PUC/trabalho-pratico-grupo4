@@ -3,123 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SisHosp Maraú – Residências</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/front/css/style.css" />
+  <title>SisHosp Maraú · Residências</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
+
 <body>
+  <div class="app">
+    <aside class="sidebar" id="barra"></aside>
+    <div class="conteudo">
+      <div class="pagina">
 
-  <nav>
-    <div class="nav-marca"> SisHosp Maraú</div>
-    <div class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="residencias.html" class="ativo">Residências</a>
-      <a href="nova-reserva.html">Nova Reserva</a>
-      <a href="historico.html">Histórico</a>
-      <a href="clientes.html">Clientes</a>
-      <a href="login.html" class="nav-sair">Sair</a>
-    </div>
-  </nav>
-
-  <div class="pagina">
-
-    <div class="topo-secao">
-      <div>
-        <h1>Residências</h1>
-        <p class="subtitulo">Imóveis cadastrados no sistema</p>
-      </div>
-      <a href="nova-residencia.html" class="btn btn-primario">＋ Nova Residência</a>
-    </div>
-
-    <div class="grid-2">
-
-      <div class="residencia-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div class="topo-secao">
           <div>
-            <div class="residencia-nome">Casa Maré</div>
-            <div class="residencia-end"> R. das Dunas, 15 – Centro · CEP 45520-000</div>
+            <h1>Residências</h1>
+            <p class="subtitulo">Imóveis cadastrados no sistema</p>
           </div>
-          <span class="badge badge-verde">Ativa</span>
+          <a href="nova-residencia.html" class="btn btn-primario">＋ Nova residência</a>
         </div>
-        <div class="gap mb-1">
-          <span class="badge badge-azul">4 quartos</span>
-          <span class="badge badge-cinza"> (75) 9 8812-3344</span>
+
+        <div class="grid-2" id="lista">
+          <p class="text-muted">Carregando…</p>
         </div>
-        <hr />
-        <div class="acoes">
-          <a href="detalhe-residencia.html" class="btn btn-primario btn-peq">Ver Detalhes</a>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
+
       </div>
-
-      <div class="residencia-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-          <div>
-            <div class="residencia-nome">Vila Coral</div>
-            <div class="residencia-end"> Av. Beira Mar, 88 – Barra · CEP 45521-100</div>
-          </div>
-          <span class="badge badge-verde">Ativa</span>
-        </div>
-        <div class="gap mb-1">
-          <span class="badge badge-azul">3 quartos</span>
-          <span class="badge badge-cinza"> (75) 9 9944-5566</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <button class="btn btn-primario btn-peq">Ver Detalhes</button>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-      <div class="residencia-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-          <div>
-            <div class="residencia-nome">Pousada Brisa</div>
-            <div class="residencia-end"> Estrada da Praia, 203 – Taipu · CEP 45522-000</div>
-          </div>
-          <span class="badge badge-verde">Ativa</span>
-        </div>
-        <div class="gap mb-1">
-          <span class="badge badge-azul">3 quartos</span>
-          <span class="badge badge-cinza"> (75) 9 9111-2277</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <button class="btn btn-primario btn-peq">Ver Detalhes</button>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-      <div class="residencia-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-          <div>
-            <div class="residencia-nome">Recanto Azul</div>
-            <div class="residencia-end"> Travessa da Lua, 7 – Porto – CEP 45523-010</div>
-          </div>
-          <span class="badge badge-verde">Ativa</span>
-        </div>
-        <div class="gap mb-1">
-          <span class="badge badge-azul">2 quartos</span>
-          <span class="badge badge-cinza"> (75) 9 8833-9900</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <button class="btn btn-primario btn-peq">Ver Detalhes</button>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-      <a href="nova-residencia.html" class="card-vazio" style="text-decoration:none;">
-        <span>＋</span>
-        <p style="font-weight:700;">Adicionar Residência</p>
-      </a>
-
-    </div>
-
-    <div class="rodape-proto">
-       Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
     </div>
   </div>
 
+  <script src="../js/api.js"></script>
+  <script src="../js/residencias.js"></script>
 </body>
+
 </html>
