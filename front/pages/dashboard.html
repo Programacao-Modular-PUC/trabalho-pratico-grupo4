@@ -3,152 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SisHosp Maraú – Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/front/css/style.css" />
+  <title>SisHosp Maraú · Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <div class="app">
+    <aside class="sidebar" id="barra"></aside>
+    <div class="conteudo">
+      <div class="pagina">
 
-  <nav>
-    <div class="nav-marca"> SisHosp Maraú</div>
-    <div class="nav-links">
-      <a href="dashboard.html" class="ativo">Dashboard</a>
-      <a href="residencias.html">Residências</a>
-      <a href="nova-reserva.html">Nova Reserva</a>
-      <a href="historico.html">Histórico</a>
-      <a href="clientes.html">Clientes</a>
-      <a href="login.html" class="nav-sair">Sair</a>
-    </div>
-  </nav>
-
-  <div class="pagina">
-
-    <div class="topo-secao">
-      <div>
-        <h1>Dashboard</h1>
-        <p class="subtitulo">Visão geral do sistema</p>
-      </div>
-    </div>
-
-
-    <div class="grid-4 mb-3">
-      <div class="stat-card">
-        <div class="stat-icone azul">🏠</div>
-        <div>
-          <div class="stat-valor">4</div>
-          <div class="stat-label">Residências</div>
+        <div class="topo-secao">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="subtitulo">Visão geral do sistema de hospedagem</p>
+          </div>
+          <a href="nova-reserva.html" class="btn btn-primario">＋ Nova reserva</a>
         </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icone verde">🛏️</div>
-        <div>
-          <div class="stat-valor">12</div>
-          <div class="stat-label">Quartos</div>
+
+        <div class="grid-4 mb-3" id="cardsStats">
+          <div class="stat-card reveal">
+            <div class="stat-icone teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></div>
+            <div><div class="stat-valor" id="stResidencias">–</div><div class="stat-label">Residências</div></div>
+          </div>
+          <div class="stat-card reveal" style="animation-delay:.06s">
+            <div class="stat-icone blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6M3 18h18M5 10V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/></svg></div>
+            <div><div class="stat-valor" id="stQuartos">–</div><div class="stat-label">Quartos</div></div>
+          </div>
+          <div class="stat-card reveal" style="animation-delay:.12s">
+            <div class="stat-icone coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <div><div class="stat-valor" id="stAlugueis">–</div><div class="stat-label">Aluguéis ativos</div></div>
+          </div>
+          <div class="stat-card reveal" style="animation-delay:.18s">
+            <div class="stat-icone amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div><div class="stat-valor" id="stClientes">–</div><div class="stat-label">Clientes</div></div>
+          </div>
         </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icone coral">📋</div>
-        <div>
-          <div class="stat-valor">7</div>
-          <div class="stat-label">Aluguéis no Mês</div>
+
+        <div class="grid-2">
+          <div class="card reveal" style="animation-delay:.1s">
+            <h2>Próximas entradas</h2>
+            <div class="tabela-wrap">
+              <table>
+                <thead><tr><th>Cliente</th><th>Quarto</th><th>Entrada</th><th>Status</th></tr></thead>
+                <tbody id="tbProximas"><tr><td colspan="4" class="text-muted">Carregando…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card reveal" style="animation-delay:.16s">
+            <h2>Ocupação por residência</h2>
+            <div class="tabela-wrap">
+              <table>
+                <thead><tr><th>Residência</th><th>Quartos</th><th>Ocupados hoje</th><th>Livres</th></tr></thead>
+                <tbody id="tbOcupacao"><tr><td colspan="4" class="text-muted">Carregando…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
       </div>
-      <div class="stat-card">
-        <div class="stat-icone areia">👥</div>
-        <div>
-          <div class="stat-valor">18</div>
-          <div class="stat-label">Clientes</div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="grid-2">
-
-      <div class="card">
-        <h2>Próximas Entradas</h2>
-        <div class="tabela-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Residência</th>
-                <th>Entrada</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Ana Souza</td>
-                <td>Casa Maré</td>
-                <td>22/07 às 12h</td>
-                <td><span class="badge badge-verde">Confirmado</span></td>
-              </tr>
-              <tr>
-                <td>Pedro Lima</td>
-                <td>Vila Coral</td>
-                <td>24/07 às 15h</td>
-                <td><span class="badge badge-azul">Reservado</span></td>
-              </tr>
-              <tr>
-                <td>Luisa Alves</td>
-                <td>Casa Maré</td>
-                <td>28/07 às 12h</td>
-                <td><span class="badge badge-cinza">Pendente</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Disponibilidade de Hoje</h2>
-        <div class="tabela-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Residência</th>
-                <th>Total</th>
-                <th>Livres</th>
-                <th>Ocupados</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Casa Maré</td>
-                <td>4</td>
-                <td>2</td>
-                <td><span class="badge badge-coral">2</span></td>
-              </tr>
-              <tr>
-                <td>Vila Coral</td>
-                <td>3</td>
-                <td>3</td>
-                <td><span class="badge badge-verde">0</span></td>
-              </tr>
-              <tr>
-                <td>Pousada Brisa</td>
-                <td>3</td>
-                <td>1</td>
-                <td><span class="badge badge-coral">2</span></td>
-              </tr>
-              <tr>
-                <td>Recanto Azul</td>
-                <td>2</td>
-                <td>2</td>
-                <td><span class="badge badge-verde">0</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="rodape-proto">
-       Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
     </div>
   </div>
 
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
 </body>
 </html>

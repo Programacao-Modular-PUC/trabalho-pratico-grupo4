@@ -3,155 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SisHosp Maraú – Casa Maré</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/front/css/style.css" />
+  <title>SisHosp Maraú · Detalhe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <div class="app">
+    <aside class="sidebar" id="barra"></aside>
+    <div class="conteudo">
+      <div class="pagina">
 
-  <nav>
-    <div class="nav-marca"> SisHosp Maraú</div>
-    <div class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="residencias.html" class="ativo">Residências</a>
-      <a href="nova-reserva.html">Nova Reserva</a>
-      <a href="historico.html">Histórico</a>
-      <a href="clientes.html">Clientes</a>
-      <a href="login.html" class="nav-sair">Sair</a>
-    </div>
-  </nav>
+        <div class="breadcrumb"><a href="residencias.html">Residências</a> › <span id="bcNome">…</span></div>
 
-  <div class="pagina">
+        <div class="topo-secao">
+          <div>
+            <h1 id="nome">Carregando…</h1>
+            <p class="subtitulo" id="endereco"></p>
+          </div>
+          <a href="#" id="btnReservar" class="btn btn-primario">＋ Nova reserva</a>
+        </div>
 
-    <div class="breadcrumb">
-      <a href="residencias.html">Residências</a> › Casa Maré
-    </div>
+        <h2>Quartos</h2>
+        <div class="grid-2 mb-3" id="quartos"><p class="text-muted">Carregando…</p></div>
 
-    <div class="topo-secao">
-      <div>
-        <h1>Casa Maré</h1>
-        <p class="subtitulo">
-          R. das Dunas, 15 – Centro, Maraú – BA &nbsp;·&nbsp;
-           (75) 9 8812-3344 &nbsp;·&nbsp;
-           casamare@email.com
-        </p>
+        <h2>Histórico de aluguéis</h2>
+        <div class="card">
+          <div class="tabela-wrap">
+            <table>
+              <thead><tr><th>Cliente</th><th>Quarto</th><th>Entrada</th><th>Saída</th><th>Diárias</th><th>Total</th><th>Status</th></tr></thead>
+              <tbody id="historico"><tr><td colspan="7" class="text-muted">Carregando…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
-      <a href="nova-reserva.html" class="btn btn-primario">＋ Nova Reserva</a>
-    </div>
-
-    <h2>Quartos</h2>
-    <div class="grid-2 mb-3">
-
-      <div class="quarto-card" style="margin-bottom:0;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div class="quarto-tipo"> Quarto Solteiro – Nº 01</div>
-          <span class="badge badge-verde">Disponível</span>
-        </div>
-        <div class="quarto-preco">R$ 180,00 <small>/ diária base</small></div>
-        <div class="amenidades">
-          <span class="badge badge-azul"> Ar-condicionado</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <a href="nova-reserva.html" class="btn btn-primario btn-peq">Reservar</a>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-      <div class="quarto-card" style="margin-bottom:0;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div class="quarto-tipo"> Quarto Casal – Nº 02</div>
-          <span class="badge badge-coral">Ocupado</span>
-        </div>
-        <div class="quarto-preco">R$ 280,00 <small>/ diária base</small></div>
-        <div class="amenidades">
-          <span class="badge badge-azul"> Ar-condicionado</span>
-          <span class="badge badge-cinza"> Hidromassagem</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <button class="btn btn-contorno btn-peq" disabled style="opacity:.5;">Ocupado até 25/07</button>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-      <div class="quarto-card" style="margin-bottom:0;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div class="quarto-tipo"> Quarto Solteiro – Nº 03</div>
-          <span class="badge badge-verde">Disponível</span>
-        </div>
-        <div class="quarto-preco">R$ 160,00 <small>/ diária base</small></div>
-        <div class="amenidades">
-          <span class="badge badge-cinza">Sem adicionais</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <a href="nova-reserva.html" class="btn btn-primario btn-peq">Reservar</a>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-      <div class="quarto-card" style="margin-bottom:0;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div class="quarto-tipo"> Quarto Casal – Nº 04</div>
-          <span class="badge badge-verde">Disponível</span>
-        </div>
-        <div class="quarto-preco">R$ 250,00 <small>/ diária base</small></div>
-        <div class="amenidades">
-          <span class="badge badge-azul"> Ar-condicionado</span>
-        </div>
-        <hr />
-        <div class="acoes">
-          <a href="nova-reserva.html" class="btn btn-primario btn-peq">Reservar</a>
-          <button class="btn btn-contorno btn-peq">Editar</button>
-        </div>
-      </div>
-
-    </div>
-
-    <h2>Histórico de Aluguéis</h2>
-    <div class="card">
-      <div class="tabela-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Cliente</th>
-              <th>Quarto</th>
-              <th>Entrada</th>
-              <th>Saída</th>
-              <th>Diárias</th>
-              <th>Valor Total</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Ana Souza</td>
-              <td>Casal Nº 02</td>
-              <td>10/07 12h</td>
-              <td>13/07 11h</td>
-              <td>3</td>
-              <td>R$ 840,00</td>
-              <td><a href="recibo.html" class="btn btn-contorno btn-peq">Recibo</a></td>
-            </tr>
-            <tr>
-              <td>Carlos Freitas</td>
-              <td>Solteiro Nº 01</td>
-              <td>01/07 12h</td>
-              <td>04/07 10h</td>
-              <td>3</td>
-              <td>R$ 540,00</td>
-              <td><a href="recibo.html" class="btn btn-contorno btn-peq">Recibo</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="rodape-proto">
-       Protótipo Sprint 1 · SisHosp Maraú · PUC Minas – Programação Modular
     </div>
   </div>
 
+  <script src="../js/api.js"></script>
+  <script src="../js/detalhe-residencia.js"></script>
 </body>
 </html>
