@@ -60,7 +60,7 @@ Glender Brás de Medeiros
 
 ## Diagrama de Classes
  
-![UML](/img/UmlSisShop.drawio%20.png)
+![UML](img/UmlSisShop.drawio.png)
 
 ## Cartão CRC
 Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnica utilizada no processo de modelagem orientada a objetos. Eles ajudam a representar de forma simples e visual as principais responsabilidades de uma classe e como ela se relaciona com outras classes dentro de um sistema.
@@ -71,13 +71,14 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
 | • Conhecer seu endereço | • Quarto |
-| • Conhecer seu número | • Aluguel |
+| • Conhecer seu número | |
 | • Conhecer seu bairro | |
 | • Conhecer seu CEP | |
 | • Conhecer seu telefone de contato | |
 | • Conhecer seu e-mail de contato | |
 | • Conhecer a lista de quartos disponíveis para aluguel | |
 | • Conhecer o histórico de aluguéis realizados | |
+| •	Adicionar e remover quartos da lista | |
 
 ---
 
@@ -87,20 +88,20 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
 | • Conhecer seu valor base de diária | • Residencia |
-| • Conhecer se possui ar-condicionado | • Aluguel |
-| • Conhecer se possui banheira de hidromassagem | • QuartoIndividual |
-| • Conhecer a residência à qual pertence | • QuartoDuplo |
-| • Calcular o valor dos adicionais comuns (AR + hidro) | • QuartoFamilia |
-| • Definir o contrato para cálculo de diária (método abstrato) | |
+| • Conhecer se possui ar-condicionado | • QuartoIndividual|
+| • Conhecer se possui banheira de hidromassagem | • QuartoDuplo  |
+| • Conhecer a residência à qual pertence | • QuartoFamilia |
+| • Calcular o valor dos adicionais comuns (AR + hidro) | |
 
 ---
 
 | **Classe: QuartoIndividual** | |
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
-| • Conhecer o número de camas de solteiro | • Quarto |
-| • Calcular o valor da diária com base no número de camas | |
-| • Aplicar adicional por cama extra (acima da primeira) | |
+| • Conhecer o número de camas | • Quarto |
+| • Calcular o valor da diária | |
+| • Retornar capacidade: igual ao número de camas | |
+| • Retornar tipo: Individual| |
 
 ---
 
@@ -109,8 +110,10 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | **Responsabilidades** | **Colaborações** |
 | • Conhecer o tipo da cama (casal, queen ou king) | • Quarto |
 | • Conhecer se possui berço disponível | |
-| • Calcular o valor da diária com adicional do tipo de cama | |
-| • Aplicar taxa extra quando o cliente solicita berço | |
+| • Calcular o valor da diária | |
+| • Adicionar R$30 se solicitar berço | |
+| • Retornar capacidade: 2 (+1 se possuir berço) | |
+| • Retornar tipo: Duplo | |
 
 ---
 
@@ -118,9 +121,11 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
 | • Conhecer a capacidade máxima de hóspedes | • Quarto |
-| • Conhecer o número de ambientes do quarto | |
-| • Calcular o valor da diária com percentual proporcional ao número de hóspedes | |
-| • Aplicar desconto progressivo para grupos maiores | |
+| • Conhecer o número de ambientes | |
+| • Calcular o valor da diária | |
+| • Aplicar desconto de 8% para ≥3 hóspedes | |
+| • Aplicar desconto de 15% para ≥5 hospedes | |
+| • Retornar tipo: Família  | |
 
 ### Caso de Uso: Cadastrar e Autenticar Clientes
 
@@ -146,12 +151,11 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | • Conhecer a data e horário de entrada | • Pagamento |
 | • Conhecer a data e horário de saída | |
 | • Conhecer a quantidade de diárias calculadas | |
-| • Conhecer o valor final do aluguel | |
-| • Calcular a quantidade de diárias conforme regra de negócio | |
+| • Conhecer o valor total do aluguel | |
+| • Conhecer o status (Ativo/Cancelado) | |
 | • Calcular o valor final (diária do quarto × quantidade de diárias) | |
-| • Verificar se o quarto está disponível no período solicitado | |
-| • Imprimir o formulário de aluguel na tela | |
-| • Gerar o pagamento associado ao aluguel | |
+| • Calcular quantidade de diárias (regra das 12h)  | |
+| • Gerar o formulário de aluguel (texto formatado) | |
 
 ---
 
@@ -161,9 +165,28 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
 | • Conhecer o aluguel ao qual está vinculado | • Aluguel |
-| • Conhecer o valor total a pagar | |
-| • Conhecer seu status (pendente ou efetuado) | |
+| • Conhecer o valor total a pagar | • StatusPagamento(enum) |
+| • Conhecer seu status (pendente, efetuado, cancelado) |• MetodoPagamento(enum) |
+| • Conhecer data/hora em que foi processado | |
+| • Conhecer o metodo de pagamento| |
+| • Processar pagamento (mudar status para Efetuado) | |
+| • Cancelar o pagamento (mudar status para Cancelado) | |
 
+### Caso de Uso: Orquestrar Regras de Negócio
+
+| **Classe: AluguelService (Service)** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Receber pedido de criação de aluguel | • Aluguel |
+| • Buscar Cliente por ID (via ClienteRepository) | • Quarto |
+| • Buscar Quarto por ID (via QuartoRepository) |• Cliente |
+| • Validar datas: entrada deve ser antes de saída |• AluguelRepository |
+| • Validar berço: solicitar só se quarto possuir berço| • QuartoRepository|
+| • Verificar disponibilidade: checar conflitos no período|• ClienteRepository |
+| • Calcular valor total = diária × número de diárias |• PagamentoRepository |
+| • Persistir Aluguel e gerar Pagamento associado|• GlobalExceptionHandler |
+| • Cancelar aluguel (status → CANCELADO)| |
+| • Listar aluguéis por residência ou por cliente| |
 ---
 
 
