@@ -1,8 +1,10 @@
 package com.grupo4.SisHosp.service;
 
 import com.grupo4.SisHosp.model.*;
+import com.grupo4.SisHosp.notification.CentralNotificacoes;
+import com.grupo4.SisHosp.payment.FormaPagamento;
+import com.grupo4.SisHosp.payment.FormaPagamentoFactory;
 import com.grupo4.SisHosp.repository.*;
-import com.grupo4.SisHosp.model.StatusAluguel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ public class AluguelService {
     private final QuartoRepository quartoRepository;
     private final ClienteRepository clienteRepository;
     private final PagamentoRepository pagamentoRepository;
+    private final CentralNotificacoes central;
 
     public List<Aluguel> listarTodos() {
         return aluguelRepository.findAll();
@@ -23,21 +26,21 @@ public class AluguelService {
 
     public Aluguel buscarPorId(Long id) {
         return aluguelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Aluguel nao encontrado"));
     }
 
     public Aluguel salvar(Long clienteId, Long quartoId, LocalDateTime entrada,
             LocalDateTime saida, int numHospedes, boolean solicitouBerco) {
 
         Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Cliente nao encontrado"));
 
         Quarto quarto = quartoRepository.findById(quartoId)
-                .orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Quarto nao encontrado"));
 
         List<Aluguel> conflitos = aluguelRepository.findConflitos(quartoId, entrada, saida, StatusAluguel.ATIVO);
         if (!conflitos.isEmpty()) {
-            throw new RuntimeException("Quarto já está ocupado neste período!");
+            throw new RuntimeException("Quarto ja esta ocupado neste periodo!");
         }
 
         Aluguel aluguel = new Aluguel();
@@ -68,6 +71,10 @@ public class AluguelService {
         Pagamento pagamento = new Pagamento(salvo);
         pagamentoRepository.save(pagamento);
 
+        central.notificar("RESERVA_CRIADA",
+                "Reserva no " + salvo.getId() + " criada para o cliente "
+                        + cliente.getNome() + ".");
+
         return salvo;
     }
 
@@ -81,12 +88,41 @@ public class AluguelService {
 
     public Aluguel cancelar(Long id) {
         Aluguel aluguel = aluguelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Aluguel nao encontrado"));
         aluguel.setStatus(StatusAluguel.CANCELADO);
-        return aluguelRepository.save(aluguel);
+        Aluguel salvo = aluguelRepository.save(aluguel);
+        central.notificar("RESERVA_CANCELADA",
+                "Reserva no " + salvo.getId() + " foi cancelada.");
+
+        return salvo;
     }
 
     public List<Aluguel> listarPorCliente(Long clienteId) {
         return aluguelRepository.findByClienteId(clienteId);
+    }
+
+    public Pagamento buscarPagamento(Long aluguelId) {
+        return pagamentoRepository.findByAluguelId(aluguelId)
+                .orElseThrow(() -> new RuntimeException("Pagamento nao encontrado"));
+    }
+
+    public Pagamento processarPagamento(Long aluguelId, String formaPagamento) {
+        Aluguel aluguel = buscarPorId(aluguelId);
+
+        Pagamento pagamento = pagamentoRepository.findByAluguelId(aluguelId)
+                .orElse(new Pagamento(aluguel));
+
+        FormaPagamento estrategia = FormaPagamentoFactory.criar(formaPagamento);
+        String resultado = estrategia.processar(aluguel.getValorTotal());
+
+        pagamento.setForma(estrategia.getNome());
+        pagamento.setDescricao(resultado);
+        pagamento.setStatus("PAGO");
+        pagamentoRepository.save(pagamento);
+        central.notificar("PAGAMENTO_CONFIRMADO",
+                "Pagamento da reserva no " + aluguel.getId()
+                        + " confirmado via " + estrategia.getNome() + ".");
+
+        return pagamento;
     }
 }

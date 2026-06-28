@@ -61,6 +61,17 @@ public class AluguelController {
     public ResponseEntity<Aluguel> cancelar(@PathVariable Long id) {
         return ResponseEntity.ok(service.cancelar(id));
     }
+    
+    @PostMapping("/{id}/pagar")
+    public ResponseEntity<?> pagar(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+        String forma = obrigatorio(body, "forma").toString();
+        return ResponseEntity.ok(service.processarPagamento(id, forma));
+    }
+
+    @GetMapping("/{id}/pagamento")
+    public ResponseEntity<?> pagamento(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarPagamento(id));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
@@ -68,7 +79,6 @@ public class AluguelController {
         return ResponseEntity.noContent().build();
     }
 
-    
     private static Object obrigatorio(Map<String, Object> body, String campo) {
         Object valor = body.get(campo);
         if (valor == null) {

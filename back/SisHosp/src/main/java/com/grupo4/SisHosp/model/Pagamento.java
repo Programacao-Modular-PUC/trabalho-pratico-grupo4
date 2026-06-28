@@ -18,6 +18,10 @@ public class Pagamento {
 
     private Double valor;
     private String status;
+    private String forma;
+
+    @Column(length = 500)
+    private String descricao;
 
     public Pagamento(Aluguel aluguel) {
         this.aluguel = aluguel;

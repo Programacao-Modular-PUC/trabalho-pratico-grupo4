@@ -2,6 +2,7 @@ package com.grupo4.SisHosp.service;
 
 import com.grupo4.SisHosp.exception.*;
 import com.grupo4.SisHosp.model.*;
+import com.grupo4.SisHosp.notification.CentralNotificacoes;
 import com.grupo4.SisHosp.repository.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ class AluguelServiceTest {
     @Mock private QuartoRepository quartoRepository;
     @Mock private ClienteRepository clienteRepository;
     @Mock private PagamentoRepository pagamentoRepository;
+    @Mock private CentralNotificacoes central;
     @InjectMocks private AluguelService service;
 
     private final LocalDateTime entrada = LocalDateTime.of(2026, 1, 10, 14, 0);

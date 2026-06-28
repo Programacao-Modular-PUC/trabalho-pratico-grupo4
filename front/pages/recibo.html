@@ -26,6 +26,17 @@
           <p class="text-muted" style="text-align:center;">Carregando recibo…</p>
         </div>
 
+        <div class="acoes nao-imprimir" id="areaPagamento"
+          style="max-width:640px; margin:1.4rem auto 0; justify-content:center; gap:.6rem; display:none; align-items:center;">
+          <label for="selForma">Pagar com:</label>
+          <select id="selForma" class="input" style="max-width:220px;">
+            <option value="PIX">PIX</option>
+            <option value="CARTAO_CREDITO">Cartão de Crédito</option>
+            <option value="DINHEIRO">Dinheiro</option>
+          </select>
+          <button class="btn btn-primario" id="btnPagar">Processar pagamento</button>
+        </div>
+
         <div class="acoes nao-imprimir" id="botoes"
           style="max-width:640px; margin:1.4rem auto 0; justify-content:center; display:none;">
           <button class="btn btn-primario" id="btnImprimir">Imprimir recibo</button>
