@@ -60,7 +60,7 @@ Glender Brás de Medeiros
 
 ## Diagrama de Classes
  
-![UML](img/UmlSisShop.drawio.png)
+![UML](img/UML.jpg)
 
 ## Cartão CRC
 Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnica utilizada no processo de modelagem orientada a objetos. Eles ajudam a representar de forma simples e visual as principais responsabilidades de uma classe e como ela se relaciona com outras classes dentro de um sistema.
@@ -165,12 +165,10 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | :--- | :--- |
 | **Responsabilidades** | **Colaborações** |
 | • Conhecer o aluguel ao qual está vinculado | • Aluguel |
-| • Conhecer o valor total a pagar | • StatusPagamento(enum) |
-| • Conhecer seu status (pendente, efetuado, cancelado) |• MetodoPagamento(enum) |
-| • Conhecer data/hora em que foi processado | |
-| • Conhecer o metodo de pagamento| |
-| • Processar pagamento (mudar status para Efetuado) | |
-| • Cancelar o pagamento (mudar status para Cancelado) | |
+| • Conhecer o valor total a pagar | |
+| • Conhecer seu status (pendente, pago) | |
+| • Conhecer a forma de pagamento utilizada | |
+| • Conhecer a descrição gerada no processamento | |
 
 ### Caso de Uso: Orquestrar Regras de Negócio
 
@@ -185,10 +183,149 @@ Os cartões CRC (Classe – Responsabilidade – Colaboração) são uma técnic
 | • Verificar disponibilidade: checar conflitos no período|• ClienteRepository |
 | • Calcular valor total = diária × número de diárias |• PagamentoRepository |
 | • Persistir Aluguel e gerar Pagamento associado|• GlobalExceptionHandler |
-| • Cancelar aluguel (status → CANCELADO)| |
-| • Listar aluguéis por residência ou por cliente| |
+| • Cancelar aluguel (status → CANCELADO)| • FormaPagamentoFactory |
+| • Listar aluguéis por residência ou por cliente| • CentralNotificacoes |
+| • Processar pagamento via estratégia escolhida (Strategy) | |
+| • Disparar notificações de eventos (Observer) | |
 ---
+
+
+### Caso de Uso: Padrão Strategy — Meios de Pagamento
+
+| **Classe: FormaPagamento (interface)** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Definir o contrato de processamento de pagamento | • PagamentoPix |
+| • Processar um valor e retornar mensagem de resultado | • PagamentoCartaoCredito |
+| • Retornar o nome da forma de pagamento | • PagamentoDinheiro |
+
+---
+
+| **Classe: PagamentoPix** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Processar pagamento via PIX | • FormaPagamento (implementa) |
+| • Gerar código de aprovação instantâneo | |
+| • Retornar nome: PIX | |
+
+---
+
+| **Classe: PagamentoCartaoCredito** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Processar pagamento via cartão de crédito | • FormaPagamento (implementa) |
+| • Simular a autorização junto à operadora | |
+| • Retornar nome: CARTAO_CREDITO | |
+
+---
+
+| **Classe: PagamentoDinheiro** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Processar pagamento em dinheiro | • FormaPagamento (implementa) |
+| • Registrar pagamento presencial na recepção | |
+| • Retornar nome: DINHEIRO | |
+
+---
+
+| **Classe: FormaPagamentoFactory** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Receber o nome da forma de pagamento escolhida | • FormaPagamento |
+| • Criar e retornar a estratégia correspondente | • PagamentoPix |
+| • Lançar exceção para forma de pagamento inválida | • PagamentoCartaoCredito |
+| | • PagamentoDinheiro |
+| | • RecursoNaoPermitidoException |
+
+---
+
+### Caso de Uso: Padrão Observer — Central de Notificações
+
+| **Classe: Observador (interface)** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Definir o contrato de um canal de notificação | • CanalEmail |
+| • Notificar um evento com a respectiva mensagem | • CanalSms |
+| • Retornar o nome do canal | • CanalInterno |
+
+---
+
+| **Classe: CanalEmail** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Notificar evento pelo canal de e-mail | • Observador (implementa) |
+| • Retornar canal: EMAIL | |
+
+---
+
+| **Classe: CanalSms** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Notificar evento pelo canal de SMS | • Observador (implementa) |
+| • Retornar canal: SMS | |
+
+---
+
+| **Classe: CanalInterno** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Notificar evento por notificação interna | • Observador (implementa) |
+| • Retornar canal: INTERNA | |
+
+---
+
+| **Classe: CentralNotificacoes** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Manter a lista de observadores (canais) | • Observador |
+| • Adicionar e remover observadores | • CanalEmail |
+| • Disparar um evento a todos os canais ativos | • CanalSms |
+| • Consultar a configuração para saber os canais ativos | • CanalInterno |
+| | • ConfiguracaoSistema |
+
+---
+
+### Caso de Uso: Padrão Singleton — Configuração Global
+
+| **Classe: ConfiguracaoSistema (Singleton)** | |
+| :--- | :--- |
+| **Responsabilidades** | **Colaborações** |
+| • Garantir uma única instância no sistema | • CentralNotificacoes |
+| • Conhecer o nome do sistema | |
+| • Conhecer a moeda utilizada | |
+| • Conhecer a lista de canais de notificação ativos | |
+| • Informar se um canal está ativo | |
+
+---
+
+## Sprint 4 — Evolução Arquitetural e Padrões de Projeto
+
+Nesta sprint o sistema foi evoluído com a aplicação de padrões de projeto. Foram escolhidas **duas funcionalidades** e implementado o **Singleton** obrigatório.
+
+### Funcionalidades e padrões aplicados
+
+| Funcionalidade | Padrão | Pacote |
+| :--- | :--- | :--- |
+| Opção 4 — Múltiplos Meios de Pagamento | **Strategy** | `payment` |
+| Opção 3 — Central de Notificações | **Observer** | `notification` |
+| Configuração global (obrigatório) | **Singleton** | `config` |
+
+### Strategy — Meios de Pagamento
+- `FormaPagamento` (interface) com `PagamentoPix`, `PagamentoCartaoCredito` e `PagamentoDinheiro`.
+- `FormaPagamentoFactory` devolve a estratégia a partir do nome.
+- Endpoints: `POST /alugueis/{id}/pagar` (corpo `{ "forma": "PIX" }`) e `GET /alugueis/{id}/pagamento`.
+- No front, a tela de **recibo** tem um seletor de forma de pagamento e o botão *Processar pagamento*.
+
+### Observer — Central de Notificações
+- `Observador` (interface) com `CanalEmail`, `CanalSms` e `CanalInterno`.
+- `CentralNotificacoes` (Subject) avisa os canais ativos quando ocorre `RESERVA_CRIADA`, `RESERVA_CANCELADA` ou `PAGAMENTO_CONFIRMADO`.
+
+### Singleton — Configuração global
+- `ConfiguracaoSistema` guarda nome do sistema, moeda e canais ativos. A `CentralNotificacoes` a consulta para saber quais canais notificar.
+
+### Documentação do Trabalho
 
 
 [Clique aqui para abrir os Cartões CRC](crc.docx)
 
+[Clique aqui para abrir o Documento Técnico](Sprint4.docx)
